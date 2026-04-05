@@ -90,7 +90,7 @@ volume_db = -15.0
 
 [node name="ManSound" type="AudioStreamPlayer2D" parent="Background" unique_id=776109885]
 stream = ExtResource("7_50g4q")
-volume_db = -5.0
+volume_db = 3.0
 
 [node name="RubenSound" type="AudioStreamPlayer2D" parent="Background" unique_id=1369019477]
 stream = ExtResource("8_3dlgs")
@@ -106,7 +106,6 @@ parameters/looping = true
 
 [node name="NyamuraHitSound" type="AudioStreamPlayer2D" parent="Background" unique_id=1821992573]
 stream = ExtResource("14_allymanhit")
-volume_db = -10.0
 
 [node name="AlisqueHitSound" type="AudioStreamPlayer2D" parent="Background" unique_id=2080440615]
 stream = ExtResource("15_allygirlhit")
@@ -126,7 +125,7 @@ volume_db = -10.0
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2069930514]
 
 [node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=1825858325]
-offset_left = 640.0
+offset_left = 520.0
 offset_top = 10.0
 offset_right = 790.0
 offset_bottom = 150.0

@@ -14,6 +14,7 @@ const HIGAN_THROW_FRAMES: Array[Texture2D] = [
 ]
 const HIGAN_THROW_ANIMATION_NAME := &"throw"
 const HIGAN_THROW_ANIMATION_FPS := 16.0
+const HIGAN_SPAWN_BLOCK_PADDING := 50.0
 const UFO_SCORE_BONUS := 2500
 const UFO_FIRST_THRESHOLD := 5000
 const UFO_BASE_FLIGHT_DURATION := 2.0
@@ -740,15 +741,29 @@ func _spawn_random_enemy() -> void:
 					overlaps_existing = true
 					break
 
+			if _is_spawn_blocked_by_higan(candidate, sprite_size):
+				overlaps_existing = true
+
 			if not overlaps_existing:
 				chosen_position = candidate
 				found_position = true
 				break
 
 		if not found_position:
+			for _fallback_attempt in range(12):
+				var fallback_candidate := Vector2(
+					randf_range(half_size.x, BASE_VIEWPORT_SIZE.x - half_size.x),
+					randf_range(half_size.y, BASE_VIEWPORT_SIZE.y - half_size.y)
+				)
+				if not _is_spawn_blocked_by_higan(fallback_candidate, sprite_size):
+					chosen_position = fallback_candidate
+					found_position = true
+					break
+
+		if not found_position:
 			chosen_position = Vector2(
-				randf_range(half_size.x, BASE_VIEWPORT_SIZE.x - half_size.x),
-				randf_range(half_size.y, BASE_VIEWPORT_SIZE.y - half_size.y)
+				clampf(half_size.x + HIGAN_SPAWN_BLOCK_PADDING, half_size.x, BASE_VIEWPORT_SIZE.x - half_size.x),
+				clampf(BASE_VIEWPORT_SIZE.y * 0.35, half_size.y, BASE_VIEWPORT_SIZE.y - half_size.y)
 			)
 
 		enemy_node.global_position = chosen_position
@@ -766,13 +781,45 @@ func spawn_ally() -> Area2D:
 	sprite.scale = base_scale * random_scale
 	_sync_ally_hitbox(ally)
 
-	var sprite_size = sprite.texture.get_size() * sprite.scale
-	var random_x = randf_range(sprite_size.x / 2, BASE_VIEWPORT_SIZE.x - sprite_size.x / 2)
-	var random_y = randf_range(sprite_size.y / 2, BASE_VIEWPORT_SIZE.y - sprite_size.y / 2)
+	var sprite_size: Vector2 = sprite.texture.get_size() * sprite.scale
+	var half_size: Vector2 = sprite_size / 2.0
+	var chosen_position: Vector2 = Vector2.ZERO
+	var found_position: bool = false
 
-	ally.global_position = Vector2(random_x, random_y)
+	for _attempt in range(12):
+		var candidate: Vector2 = Vector2(
+			randf_range(half_size.x, BASE_VIEWPORT_SIZE.x - half_size.x),
+			randf_range(half_size.y, BASE_VIEWPORT_SIZE.y - half_size.y)
+		)
+		if not _is_spawn_blocked_by_higan(candidate, sprite_size):
+			chosen_position = candidate
+			found_position = true
+			break
+
+	if not found_position:
+		chosen_position = Vector2(
+			clampf(half_size.x + HIGAN_SPAWN_BLOCK_PADDING, half_size.x, BASE_VIEWPORT_SIZE.x - half_size.x),
+			clampf(BASE_VIEWPORT_SIZE.y * 0.7, half_size.y, BASE_VIEWPORT_SIZE.y - half_size.y)
+		)
+
+	ally.global_position = chosen_position
 	ally.show()
 	return ally
+
+func _get_higan_spawn_block_rect() -> Rect2:
+	if higan_throw_frame == null:
+		return Rect2()
+
+	var block_rect := higan_throw_frame.get_global_rect()
+	return block_rect.grow(HIGAN_SPAWN_BLOCK_PADDING)
+
+func _is_spawn_blocked_by_higan(candidate_position: Vector2, sprite_size: Vector2) -> bool:
+	var block_rect := _get_higan_spawn_block_rect()
+	if block_rect.size.x <= 0.0 or block_rect.size.y <= 0.0:
+		return false
+
+	var sprite_rect := Rect2(candidate_position - (sprite_size / 2.0), sprite_size)
+	return sprite_rect.intersects(block_rect)
 
 # Создает эффект кровавого всплеска в точке попадания.
 func _spawn_blood_splash(at_position: Vector2) -> void:
