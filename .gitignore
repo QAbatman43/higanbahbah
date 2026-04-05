@@ -27,3 +27,7 @@ Thumbs.db
 /webmanualrelease/
 /web_release_20260405/
 /web_release_20260405_fixanim/
+
+!docs/*.pck
+!docs/*.wasm
+!docs/*.js
