@@ -223,6 +223,8 @@ const engine = new Engine(GODOT_CONFIG);
 	} else {
 		setStatusMode('progress');
 		engine.startGame({
+			'executable': 'Higanbahbah',
+			'mainPack': 'Higanbahbah.pck',
 			'onProgress': function (current, total) {
 				if (current > 0 && total > 0) {
 					statusProgress.value = current;
