@@ -1,0 +1,485 @@
+[gd_scene format=3 uid="uid://clmanbk4xc6lu"]
+
+[ext_resource type="Script" uid="uid://cksbfhmp62rpw" path="res://root.gd" id="1_pq8q7"]
+[ext_resource type="PackedScene" uid="uid://blvqqxxoelpti" path="res://arrow.tscn" id="2_jnlp7"]
+[ext_resource type="Texture2D" uid="uid://l2vqqa8aky04" path="res://Images/game_background_rgg.png" id="3_l8v81"]
+[ext_resource type="AudioStream" uid="uid://dodk516u4ofuh" path="res://audio/zvuk-strely2.mp3" id="4_vyht1"]
+[ext_resource type="Texture2D" uid="uid://crfx7a3eoghe1" path="res://Images/aim.png" id="5_l8v81"]
+[ext_resource type="FontFile" uid="uid://bcg7yvop6bb6p" path="res://fronts/firebugrus_lat.otf" id="5_qw60f"]
+[ext_resource type="AudioStream" uid="uid://oufgi1n7faol" path="res://audio/rekvi.mp3" id="5_r3r3k"]
+[ext_resource type="AudioStream" uid="uid://be20r4jn1yvjv" path="res://audio/varan.mp3" id="6_blcw0"]
+[ext_resource type="AudioStream" uid="uid://bypr2jddyxei6" path="res://audio/tostar_pizda.mp3" id="7_50g4q"]
+[ext_resource type="Texture2D" uid="uid://ckujxsh6bfrqh" path="res://Images/varan.png" id="7_gd4vy"]
+[ext_resource type="AudioStream" uid="uid://2hia1u8kicdq" path="res://audio/ruben.mp3" id="8_3dlgs"]
+[ext_resource type="Texture2D" uid="uid://bbp6r7msbir6k" path="res://Images/rekvi.png" id="8_qw60f"]
+[ext_resource type="Texture2D" uid="uid://ktw4ep6qov2h" path="res://Images/Jojo_tostar.png" id="9_eji0w"]
+[ext_resource type="AudioStream" uid="uid://b31m2gve4t00t" path="res://audio/shnume.mp3" id="9_vte5o"]
+[ext_resource type="AudioStream" uid="uid://yq8t0dnsix1w" path="res://audio/higan_bomba.mp3" id="10_blcw0"]
+[ext_resource type="Texture2D" uid="uid://cyupv2s0vqyng" path="res://Images/ruben.png" id="10_qwhpj"]
+[ext_resource type="Texture2D" uid="uid://dve07cd7keq4t" path="res://Images/shnume_v2.png" id="11_qt76e"]
+[ext_resource type="Texture2D" uid="uid://6frtq61lkdjy" path="res://Images/nyamura.png" id="12_allym"]
+[ext_resource type="Texture2D" uid="uid://4jwgudtji5xw" path="res://Images/alisque.png" id="13_allyf"]
+[ext_resource type="AudioStream" uid="uid://drotdpj0pkh6f" path="res://audio/nyama.mp3" id="14_allymanhit"]
+[ext_resource type="AudioStream" uid="uid://c7cvdxuqitbqm" path="res://audio/alisque.mp3" id="15_allygirlhit"]
+[ext_resource type="Texture2D" uid="uid://dklu7vqdkk3mf" path="res://Images/snow.png" id="16_ufo"]
+[ext_resource type="AudioStream" uid="uid://ciqpenctfceil" path="res://audio/snow.mp3" id="17_ufosound"]
+[ext_resource type="AudioStream" uid="uid://crulh8xxxfaf4" path="res://audio/doh1.mp3" id="18_doh1"]
+[ext_resource type="AudioStream" uid="uid://ciq2qjj4py5y5" path="res://audio/babah.mp3" id="19_babahexplosion"]
+[ext_resource type="Texture2D" uid="uid://dmyuewlpes47r" path="res://Images/start.png" id="20_pause_start"]
+[ext_resource type="Texture2D" uid="uid://l5ms47qrgv1p" path="res://Images/exit.png" id="21_pause_exit"]
+[ext_resource type="Texture2D" uid="uid://cvhrl2vna3i36" path="res://Images/pausebox.png" id="22_pause_box"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pause_panel"]
+content_margin_left = 118.0
+content_margin_top = 124.0
+content_margin_right = 118.0
+content_margin_bottom = 86.0
+texture = ExtResource("22_pause_box")
+texture_margin_left = 88.0
+texture_margin_top = 122.0
+texture_margin_right = 88.0
+texture_margin_bottom = 86.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pause_button"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qw60f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_huihk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tw3kd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gd4vy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eji0w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ufo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ally_man"]
+size = Vector2(46, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ally_girl"]
+
+[node name="Root" type="Node2D" unique_id=539663848]
+script = ExtResource("1_pq8q7")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=510743705]
+position = Vector2(647.5, 517)
+scale = Vector2(0.8352864, 1.0019531)
+texture = ExtResource("3_l8v81")
+metadata/_edit_lock_ = true
+
+[node name="Arrow" parent="Background" unique_id=1569382214 instance=ExtResource("2_jnlp7")]
+visible = false
+position = Vector2(773.2082, -13.9184265)
+scale = Vector2(0.80125195, 0.9941748)
+
+[node name="ZvukStrely2" type="AudioStreamPlayer2D" parent="Background" unique_id=917389234]
+visible = false
+position = Vector2(773.2082, -204.79999)
+scale = Vector2(0.80125195, 0.9941748)
+stream = ExtResource("4_vyht1")
+volume_db = -10.595
+
+[node name="RekviSound" type="AudioStreamPlayer2D" parent="Background" unique_id=1228099827]
+stream = ExtResource("5_r3r3k")
+volume_db = 10.0
+
+[node name="VaranSound" type="AudioStreamPlayer2D" parent="Background" unique_id=190768406]
+stream = ExtResource("6_blcw0")
+volume_db = -15.0
+
+[node name="ManSound" type="AudioStreamPlayer2D" parent="Background" unique_id=776109885]
+stream = ExtResource("7_50g4q")
+volume_db = -5.0
+
+[node name="RubenSound" type="AudioStreamPlayer2D" parent="Background" unique_id=1369019477]
+stream = ExtResource("8_3dlgs")
+volume_db = -10.0
+
+[node name="ShnumeSound" type="AudioStreamPlayer2D" parent="Background" unique_id=1612082689]
+stream = ExtResource("9_vte5o")
+volume_db = -15.0
+
+[node name="HiganBombaMusic" type="AudioStreamPlayer" parent="Background" unique_id=893680792]
+stream = ExtResource("10_blcw0")
+parameters/looping = true
+
+[node name="NyamuraHitSound" type="AudioStreamPlayer2D" parent="Background" unique_id=1821992573]
+stream = ExtResource("14_allymanhit")
+volume_db = -10.0
+
+[node name="AlisqueHitSound" type="AudioStreamPlayer2D" parent="Background" unique_id=2080440615]
+stream = ExtResource("15_allygirlhit")
+
+[node name="SnowSound" type="AudioStreamPlayer2D" parent="Background" unique_id=321284304]
+stream = ExtResource("17_ufosound")
+volume_db = 10.0
+
+[node name="ComboBreakSound" type="AudioStreamPlayer2D" parent="Background" unique_id=281410607]
+stream = ExtResource("18_doh1")
+volume_db = -4.0
+
+[node name="BombExplosionSound" type="AudioStreamPlayer2D" parent="Background" unique_id=921664324]
+stream = ExtResource("19_babahexplosion")
+volume_db = -10.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2069930514]
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=1825858325]
+offset_left = 640.0
+offset_top = 10.0
+offset_right = 790.0
+offset_bottom = 150.0
+theme_override_colors/font_color = Color(0.921569, 0.290196, 0.109804, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_qw60f")
+theme_override_font_sizes/font_size = 72
+horizontal_alignment = 2
+metadata/_edit_lock_ = true
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer" unique_id=1013892371]
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 161.0
+offset_bottom = 99.0
+theme_override_colors/font_color = Color(0.921569, 0.290196, 0.109804, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_qw60f")
+theme_override_font_sizes/font_size = 72
+metadata/_edit_lock_ = true
+
+[node name="ComboLabel" type="Label" parent="CanvasLayer" unique_id=1960304338]
+visible = false
+offset_left = 200.0
+offset_top = 8.0
+offset_right = 600.0
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(0.997744, 0.98514646, 0.9836703, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("5_qw60f")
+theme_override_font_sizes/font_size = 52
+text = "COMBO: X2"
+horizontal_alignment = 1
+
+[node name="PauseOverlay" type="ColorRect" parent="CanvasLayer" unique_id=853249169]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45)
+
+[node name="PausePanel" type="PanelContainer" parent="CanvasLayer/PauseOverlay" unique_id=941955525]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -345.0
+offset_top = -344.0
+offset_right = 274.39844
+offset_bottom = 235.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0058147, 1.1947721)
+theme_override_styles/panel = SubResource("StyleBoxTexture_pause_panel")
+metadata/_edit_lock_ = true
+
+[node name="PauseVBox" type="VBoxContainer" parent="CanvasLayer/PauseOverlay/PausePanel" unique_id=291634735]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="PauseTitle" type="Label" parent="CanvasLayer/PauseOverlay/PausePanel/PauseVBox" unique_id=1237097599]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.921569, 0.290196, 0.109804, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_qw60f")
+theme_override_font_sizes/font_size = 42
+text = "ПАУЗА"
+horizontal_alignment = 1
+
+[node name="PauseSpacer" type="Control" parent="CanvasLayer/PauseOverlay/PausePanel/PauseVBox" unique_id=1301494066]
+layout_mode = 2
+
+[node name="PauseSpacer2" type="Control" parent="CanvasLayer/PauseOverlay/PausePanel/PauseVBox" unique_id=652732786]
+layout_mode = 2
+
+[node name="PauseEffectsLabel" type="Label" parent="CanvasLayer/PauseOverlay/PausePanel/PauseVBox" unique_id=1860334021]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.921569, 0.290196, 0.109804, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_qw60f")
+theme_override_font_sizes/font_size = 18
+text = "ГРОМКОСТЬ ЭФФЕКТОВ"
+horizontal_alignment = 1
+
+[node name="PauseEffectsSlider" type="HSlider" parent="CanvasLayer/PauseOverlay/PausePanel/PauseVBox" unique_id=334084667]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+value = 50.0
+
+[node name="PauseEffectsValue" type="Label" parent="CanvasLayer/PauseOverlay/PausePanel/PauseVBox" unique_id=168113383]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.921569, 0.290196, 0.109804, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_qw60f")
+theme_override_font_sizes/font_size = 18
+text = "50"
+horizontal_alignment = 1
+
+[node name="PauseMusicLabel" type="Label" parent="CanvasLayer/PauseOverlay/PausePanel/PauseVBox" unique_id=121805232]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.921569, 0.290196, 0.109804, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_qw60f")
+theme_override_font_sizes/font_size = 18
+text = "ГРОМКОСТЬ МУЗЫКИ"
+horizontal_alignment = 1
+
+[node name="PauseMusicSlider" type="HSlider" parent="CanvasLayer/PauseOverlay/PausePanel/PauseVBox" unique_id=585632684]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+value = 50.0
+
+[node name="PauseMusicValue" type="Label" parent="CanvasLayer/PauseOverlay/PausePanel/PauseVBox" unique_id=613574951]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.921569, 0.290196, 0.109804, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_qw60f")
+theme_override_font_sizes/font_size = 18
+text = "50"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="CanvasLayer/PauseOverlay/PausePanel/PauseVBox" unique_id=1303863537]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.921569, 0.290196, 0.109804, 1)
+theme_override_colors/font_pressed_color = Color(0.921569, 0.290196, 0.109804, 1)
+theme_override_colors/font_hover_color = Color(0.921569, 0.290196, 0.109804, 1)
+theme_override_fonts/font = ExtResource("5_qw60f")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pause_button")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_pause_button")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_pause_button")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_pause_button")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pause_button")
+icon = ExtResource("20_pause_start")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ResumeButtonLabel" type="Label" parent="CanvasLayer/PauseOverlay/PausePanel/PauseVBox/ResumeButton" unique_id=766638766]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -18.0
+offset_right = 124.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.921569, 0.290196, 0.109804, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_qw60f")
+theme_override_font_sizes/font_size = 26
+text = "ПРОДОЛЖИТЬ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackToMenuButton" type="Button" parent="CanvasLayer/PauseOverlay/PausePanel/PauseVBox" unique_id=1021208631]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.921569, 0.290196, 0.109804, 1)
+theme_override_colors/font_pressed_color = Color(0.921569, 0.290196, 0.109804, 1)
+theme_override_colors/font_hover_color = Color(0.921569, 0.290196, 0.109804, 1)
+theme_override_fonts/font = ExtResource("5_qw60f")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pause_button")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_pause_button")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_pause_button")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_pause_button")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pause_button")
+icon = ExtResource("21_pause_exit")
+icon_alignment = 1
+expand_icon = true
+
+[node name="BackToMenuButtonLabel" type="Label" parent="CanvasLayer/PauseOverlay/PausePanel/PauseVBox/BackToMenuButton" unique_id=315752188]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -18.0
+offset_right = 92.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.921569, 0.290196, 0.109804, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_qw60f")
+theme_override_font_sizes/font_size = 26
+text = "В МЕНЮ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseHeaderTitle" type="Label" parent="CanvasLayer/PauseOverlay/PausePanel" unique_id=560421771]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.921569, 0.290196, 0.109804, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_qw60f")
+theme_override_font_sizes/font_size = 34
+text = "ПАУЗА"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bow" type="Node2D" parent="." unique_id=379019658]
+position = Vector2(89, 551)
+
+[node name="HiganThrowFrame" type="ReferenceRect" parent="Bow" unique_id=490185338]
+offset_left = -138.0
+offset_top = -94.0
+offset_right = 90.0
+offset_bottom = 114.0
+border_color = Color(1, 0.22, 0.12, 0.95)
+metadata/_edit_use_anchors_ = true
+
+[node name="HiganThrowAnimation" type="AnimatedSprite2D" parent="Bow" unique_id=1632215873]
+position = Vector2(184, -266)
+
+[node name="ShotFlash" type="Polygon2D" parent="Bow" unique_id=1722870819]
+visible = false
+position = Vector2(42, 0)
+color = Color(1, 0.96, 0.62, 1)
+polygon = PackedVector2Array(-4, -16, 40, 0, -4, 16, 10, 0)
+
+[node name="ShotFlashCore" type="Polygon2D" parent="Bow" unique_id=142315539]
+visible = false
+position = Vector2(44, 0)
+color = Color(1, 1, 0.92, 1)
+polygon = PackedVector2Array(-2, -8, 20, 0, -2, 8, 6, 0)
+
+[node name="enemies" type="Sprite2D" parent="." unique_id=297314977]
+
+[node name="Shnume" type="Area2D" parent="enemies" unique_id=1942598002]
+position = Vector2(1456, 603)
+
+[node name="CollisionShape2DShnume" type="CollisionShape2D" parent="enemies/Shnume" unique_id=828257404]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_qw60f")
+
+[node name="Sprite2DShnume" type="Sprite2D" parent="enemies/Shnume" unique_id=1503848256]
+position = Vector2(-5.9366226e-05, -1.9999785)
+scale = Vector2(0.16137691, 0.1697388)
+texture = ExtResource("11_qt76e")
+
+[node name="Rekvi" type="Area2D" parent="enemies" unique_id=1634842446]
+position = Vector2(1984, 607)
+
+[node name="CollisionShape2DRekvi" type="CollisionShape2D" parent="enemies/Rekvi" unique_id=72649053]
+shape = SubResource("RectangleShape2D_huihk")
+
+[node name="Sprite2DRekvi" type="Sprite2D" parent="enemies/Rekvi" unique_id=435077038]
+position = Vector2(-2.9999542, -0.99999046)
+scale = Vector2(0.16625986, 0.14550781)
+texture = ExtResource("8_qw60f")
+
+[node name="Tostar" type="Area2D" parent="enemies" unique_id=847140014]
+position = Vector2(2238, 610)
+
+[node name="Sprite2DTostar" type="Sprite2D" parent="enemies/Tostar" unique_id=1112797138]
+position = Vector2(2.670288e-05, -0.9999933)
+scale = Vector2(0.09960951, 0.13195805)
+texture = ExtResource("9_eji0w")
+
+[node name="CollisionShape2DTostar" type="CollisionShape2D" parent="enemies/Tostar" unique_id=1998203327]
+shape = SubResource("RectangleShape2D_tw3kd")
+
+[node name="Varan" type="Area2D" parent="enemies" unique_id=1294099242]
+position = Vector2(1736, 602)
+
+[node name="Sprite2DVaran" type="Sprite2D" parent="enemies/Varan" unique_id=766297249]
+position = Vector2(1.9999647, -1.9999928)
+scale = Vector2(0.1386718, 0.1291504)
+texture = ExtResource("7_gd4vy")
+
+[node name="CollisionShape2DVaran" type="CollisionShape2D" parent="enemies/Varan" unique_id=299570529]
+shape = SubResource("RectangleShape2D_gd4vy")
+
+[node name="Ruben" type="Area2D" parent="enemies" unique_id=318192641]
+position = Vector2(2520, 619)
+
+[node name="Sprite2DRuben" type="Sprite2D" parent="enemies/Ruben" unique_id=430374936]
+position = Vector2(1.0000639, -3.0000038)
+scale = Vector2(0.13183594, 0.14172362)
+texture = ExtResource("10_qwhpj")
+
+[node name="CollisionShape2DRuben" type="CollisionShape2D" parent="enemies/Ruben" unique_id=1961617292]
+shape = SubResource("RectangleShape2D_eji0w")
+
+[node name="Snow" type="Area2D" parent="enemies" unique_id=346833164]
+position = Vector2(1870, 246)
+
+[node name="Sprite2DSnow" type="Sprite2D" parent="enemies/Snow" unique_id=424573142]
+position = Vector2(-1.9999447, -0.9999976)
+scale = Vector2(0.14230669, 0.13755159)
+texture = ExtResource("16_ufo")
+
+[node name="CollisionShape2DSnow" type="CollisionShape2D" parent="enemies/Snow" unique_id=600450586]
+shape = SubResource("RectangleShape2D_ufo")
+
+[node name="allies" type="Node2D" parent="." unique_id=639380246]
+
+[node name="Nyamura" type="Area2D" parent="allies" unique_id=544863476]
+position = Vector2(1116, 624)
+
+[node name="CollisionShape2DNyamura" type="CollisionShape2D" parent="allies/Nyamura" unique_id=998604532]
+position = Vector2(314, -348)
+shape = SubResource("RectangleShape2D_ally_man")
+
+[node name="Sprite2DNyamura" type="Sprite2D" parent="allies/Nyamura" unique_id=902560997]
+position = Vector2(314.71674, -345.85428)
+scale = Vector2(0.112210244, 0.10396815)
+texture = ExtResource("12_allym")
+
+[node name="Alisque" type="Area2D" parent="allies" unique_id=1383061955]
+position = Vector2(955, 630)
+
+[node name="CollisionShape2DAlisque" type="CollisionShape2D" parent="allies/Alisque" unique_id=1986287550]
+position = Vector2(691, -329)
+shape = SubResource("RectangleShape2D_ally_girl")
+
+[node name="Sprite2DAlisque" type="Sprite2D" parent="allies/Alisque" unique_id=1903188141]
+position = Vector2(691, -330.00003)
+scale = Vector2(0.12789705, 0.106487654)
+texture = ExtResource("13_allyf")
+
+[node name="Aim" type="Sprite2D" parent="." unique_id=946016674]
+visibility_layer = 3
+position = Vector2(78.62506, 52.625065)
+scale = Vector2(0.046449963, 0.05165594)
+texture = ExtResource("5_l8v81")
+
+[node name="Timer" type="Timer" parent="." unique_id=1404896851]
+process_callback = 0
+wait_time = 2.0
+autostart = true
+ignore_time_scale = true

@@ -1,0 +1,213 @@
+[gd_scene format=3 uid="uid://r1axh80lqg2j"]
+
+[ext_resource type="Texture2D" uid="uid://c0fuxes3ymgth" path="res://Images/higanmenu_back.png" id="1_7vrkn"]
+[ext_resource type="Script" uid="uid://mni8m6r3qlvo" path="res://main_menu_scene.gd" id="1_fu7sn"]
+[ext_resource type="FontFile" uid="uid://bcg7yvop6bb6p" path="res://fronts/firebugrus_lat.otf" id="2_fu7sn"]
+[ext_resource type="Texture2D" uid="uid://c7p6itml1a8dg" path="res://Images/logo.png" id="3_logo"]
+[ext_resource type="Texture2D" uid="uid://dmyuewlpes47r" path="res://Images/start.png" id="4_start"]
+[ext_resource type="Texture2D" uid="uid://bqbj2lil6jepo" path="res://Images/leaderbord.png" id="5_leaderboard"]
+[ext_resource type="Texture2D" uid="uid://rxxe0unl0p1n" path="res://Images/settings.png" id="6_settings"]
+[ext_resource type="Texture2D" uid="uid://l5ms47qrgv1p" path="res://Images/exit.png" id="7_exit"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_start"]
+
+[node name="MainMenu" type="Control" unique_id=1047880495]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fu7sn")
+
+[node name="MenuBack" type="TextureRect" parent="." unique_id=319784705]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_7vrkn")
+expand_mode = 1
+stretch_mode = 6
+metadata/_edit_lock_ = true
+
+[node name="Logo" type="TextureRect" parent="." unique_id=1029837714]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 30.0
+offset_right = 760.0
+offset_bottom = 275.0
+texture = ExtResource("3_logo")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="HiganMenuFrame" type="ReferenceRect" parent="." unique_id=879314553]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 300.0
+offset_right = 790.0
+offset_bottom = 595.0
+border_color = Color(1, 0.22, 0.12, 0.95)
+metadata/_edit_lock_ = true
+
+[node name="HiganMenuAnimation" type="AnimatedSprite2D" parent="." unique_id=1568493112]
+position = Vector2(974, 764)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1170863694]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 315.0
+offset_right = 410.0
+offset_bottom = 560.0
+theme_override_constants/separation = 8
+metadata/_edit_lock_ = true
+
+[node name="StartButton" type="Button" parent="VBoxContainer" unique_id=1024516797]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fu7sn")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxEmpty_start")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_start")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_start")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_start")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_start")
+icon = ExtResource("4_start")
+icon_alignment = 1
+expand_icon = true
+
+[node name="StartButtonLabel" type="Label" parent="VBoxContainer/StartButton" unique_id=1048454371]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = -25.0
+offset_right = 113.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.921569, 0.290196, 0.109804, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_fu7sn")
+theme_override_font_sizes/font_size = 34
+text = "ИГРАТЬ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreButton" type="Button" parent="VBoxContainer" unique_id=881486545]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fu7sn")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxEmpty_start")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_start")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_start")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_start")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_start")
+icon = ExtResource("5_leaderboard")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ScoreButtonLabel" type="Label" parent="VBoxContainer/ScoreButton" unique_id=1369204093]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -113.0
+offset_top = -25.0
+offset_right = 113.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.921569, 0.290196, 0.109804, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_fu7sn")
+theme_override_font_sizes/font_size = 34
+text = "       РЕКОРДЫ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer" unique_id=420059295]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fu7sn")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxEmpty_start")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_start")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_start")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_start")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_start")
+icon = ExtResource("6_settings")
+icon_alignment = 1
+expand_icon = true
+
+[node name="OptionsButtonLabel" type="Label" parent="VBoxContainer/OptionsButton" unique_id=1906204261]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -25.0
+offset_right = 128.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.921569, 0.290196, 0.109804, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_fu7sn")
+theme_override_font_sizes/font_size = 34
+text = "   НАСТРОЙКИ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="Button" parent="VBoxContainer" unique_id=2138461926]
+visible = false
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fu7sn")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxEmpty_start")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_start")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_start")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_start")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_start")
+icon = ExtResource("7_exit")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ExitButtonLabel" type="Label" parent="VBoxContainer/ExitButton" unique_id=1738808775]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.0
+offset_top = -25.0
+offset_right = 95.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.921569, 0.290196, 0.109804, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_fu7sn")
+theme_override_font_sizes/font_size = 34
+text = "ВЫХОД"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

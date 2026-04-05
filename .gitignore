@@ -1,0 +1,29 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+.import/
+.export/
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Local builds and exports
+*.exe
+*.pck
+*.zip
+
+# Export/output folders
+/release/
+/video/
+/Higanbahbah/
+/Higanbahbah_itch/
+/Higanbahbah_itch_fixed/
+/itch_upload_20260405/
+/itch_upload_20260405_fixanim/
+/manual release/
+/manualrealease2/
+/webmanualrelease/
+/web_release_20260405/
+/web_release_20260405_fixanim/
