@@ -1,16 +1,14 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
 		<title>Держи Бомбу Я Хиган</title>
 		<style>
-html, body {
+html, body, #canvas {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	width: 100%;
-	height: 100%;
 }
 
 body {
@@ -22,12 +20,6 @@ body {
 
 #canvas {
 	display: block;
-	width: 800px;
-	height: 600px;
-	position: fixed;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
 }
 
 #canvas:focus {
@@ -117,15 +109,13 @@ body {
 			<div id="status-notice"></div>
 		</div>
 
-		<script src="Higanbahbah.js"></script>
+		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":0,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"Higanbahbah","experimentalVK":false,"fileSizes":{"Higanbahbah.pck":42026492,"Higanbahbah.wasm":1509558},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":0,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":42027452,"index.wasm":1508102},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
-engine.installServiceWorker = function () { return Promise.resolve(); };
 
 (function () {
-	const canvas = document.getElementById('canvas');
 	const statusOverlay = document.getElementById('status');
 	const statusProgress = document.getElementById('status-progress');
 	const statusNotice = document.getElementById('status-notice');
@@ -172,34 +162,9 @@ engine.installServiceWorker = function () { return Promise.resolve(); };
 		initializing = false;
 	}
 
-	function lockCanvasToProjectSize() {
-		canvas.width = 800;
-		canvas.height = 600;
-		canvas.style.width = '800px';
-		canvas.style.height = '600px';
-		canvas.style.position = 'fixed';
-		canvas.style.left = '50%';
-		canvas.style.top = '50%';
-		canvas.style.transform = 'translate(-50%, -50%)';
-	}
-
-	lockCanvasToProjectSize();
-	window.addEventListener('resize', lockCanvasToProjectSize);
-
 	const missing = Engine.getMissingFeatures({
 		threads: GODOT_THREADS_ENABLED,
 	});
-
-	async function clearGodotWebCaches() {
-		if ('serviceWorker' in navigator) {
-			const registrations = await navigator.serviceWorker.getRegistrations();
-			await Promise.all(registrations.map((registration) => registration.unregister()));
-		}
-		if ('caches' in window) {
-			const keys = await caches.keys();
-			await Promise.all(keys.map((key) => caches.delete(key)));
-		}
-	}
 
 	if (missing.length !== 0) {
 		if (GODOT_CONFIG['serviceWorker'] && GODOT_CONFIG['ensureCrossOriginIsolationHeaders'] && 'serviceWorker' in navigator) {
@@ -234,31 +199,22 @@ engine.installServiceWorker = function () { return Promise.resolve(); };
 		}
 	} else {
 		setStatusMode('progress');
-		clearGodotWebCaches().catch(console.warn).then(function () {
-			engine.startGame({
-				'executable': 'Higanbahbah',
-				'mainPack': 'Higanbahbah.pck',
-				'onProgress': function (current, total) {
-					if (current > 0 && total > 0) {
-						statusProgress.value = current;
-						statusProgress.max = total;
-					} else {
-						statusProgress.removeAttribute('value');
-						statusProgress.removeAttribute('max');
-					}
-				},
-			}).then(() => {
-				setStatusMode('hidden');
-				lockCanvasToProjectSize();
-				window.dispatchEvent(new Event('resize'));
-				setTimeout(lockCanvasToProjectSize, 50);
-				setTimeout(lockCanvasToProjectSize, 200);
-			}, displayFailureNotice);
-		});
+		engine.startGame({
+			'onProgress': function (current, total) {
+				if (current > 0 && total > 0) {
+					statusProgress.value = current;
+					statusProgress.max = total;
+				} else {
+					statusProgress.removeAttribute('value');
+					statusProgress.removeAttribute('max');
+				}
+			},
+		}).then(() => {
+			setStatusMode('hidden');
+		}, displayFailureNotice);
 	}
 }());
 		</script>
 	</body>
 </html>
-
 
