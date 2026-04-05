@@ -24,9 +24,12 @@ Thumbs.db
 /itch_upload_20260405_fixanim/
 /manual release/
 /manualrealease2/
+/manualrealease3/
+/yarick050426/
 /webmanualrelease/
 /web_release_20260405/
 /web_release_20260405_fixanim/
+/docs/_runtime_search.txt
 
 !docs/*.pck
 !docs/*.wasm
