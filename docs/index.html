@@ -124,6 +124,7 @@ const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
 (function () {
+	const canvas = document.getElementById('canvas');
 	const statusOverlay = document.getElementById('status');
 	const statusProgress = document.getElementById('status-progress');
 	const statusNotice = document.getElementById('status-notice');
@@ -169,6 +170,20 @@ const engine = new Engine(GODOT_CONFIG);
 		setStatusMode('notice');
 		initializing = false;
 	}
+
+	function lockCanvasToProjectSize() {
+		canvas.width = 800;
+		canvas.height = 600;
+		canvas.style.width = '800px';
+		canvas.style.height = '600px';
+		canvas.style.position = 'fixed';
+		canvas.style.left = '50%';
+		canvas.style.top = '50%';
+		canvas.style.transform = 'translate(-50%, -50%)';
+	}
+
+	lockCanvasToProjectSize();
+	window.addEventListener('resize', lockCanvasToProjectSize);
 
 	const missing = Engine.getMissingFeatures({
 		threads: GODOT_THREADS_ENABLED,
@@ -219,9 +234,10 @@ const engine = new Engine(GODOT_CONFIG);
 			},
 		}).then(() => {
 			setStatusMode('hidden');
+			lockCanvasToProjectSize();
 			window.dispatchEvent(new Event('resize'));
-			setTimeout(() => window.dispatchEvent(new Event('resize')), 50);
-			setTimeout(() => window.dispatchEvent(new Event('resize')), 200);
+			setTimeout(lockCanvasToProjectSize, 50);
+			setTimeout(lockCanvasToProjectSize, 200);
 		}, displayFailureNotice);
 	}
 }());
