@@ -8,6 +8,7 @@ const BUTTON_SHAKE_SPEED := 26.0
 
 @onready var last_score_label: Label = $Window/Margin/VBox/LastScoreLabel
 @onready var entries_label: Label = $Window/Margin/VBox/EntriesLabel
+@onready var result_message_label: Label = $Window/Margin/VBox/ResultMessageLabel
 @onready var name_prompt_label: Label = $Window/Margin/VBox/NamePromptLabel
 @onready var name_input: LineEdit = $Window/Margin/VBox/NameInput
 @onready var save_button: Button = $Window/Margin/VBox/SaveButton
@@ -134,13 +135,17 @@ func _init_pending_score() -> void:
 
 func _update_name_prompt() -> void:
 	var should_show_prompt = pending_score >= 0 and Leaderboard.qualifies_for_top(pending_score)
+	var should_show_retry_message = pending_score >= 0 and not should_show_prompt
 	name_prompt_label.visible = should_show_prompt
 	name_input.visible = should_show_prompt
 	save_button.visible = should_show_prompt
+	result_message_label.visible = should_show_retry_message
 	if should_show_prompt:
 		name_prompt_label.text = "Новый топ-10! Введи имя:"
 		name_input.grab_focus()
 		name_input.select_all()
+	elif should_show_retry_message:
+		result_message_label.text = "ВАШ СЧЕТ %d, ВЫ НЕ В ТОП 10, ПОПРОБУЙТЕ СНОВА" % pending_score
 
 func _on_save_button_pressed() -> void:
 	_save_pending_score()
@@ -165,4 +170,5 @@ func _save_pending_score() -> void:
 		get_tree().remove_meta("last_score")
 	last_score_label.text = "Сохранено: %s - %d" % [player_name, saved_score]
 	name_input.text = ""
+	result_message_label.visible = false
 	_refresh_scores()

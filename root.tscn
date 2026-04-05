@@ -126,7 +126,7 @@ volume_db = -10.0
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2069930514]
 
 [node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=1825858325]
-offset_left = 640.0
+offset_left = 520.0
 offset_top = 10.0
 offset_right = 790.0
 offset_bottom = 150.0

@@ -37,6 +37,7 @@ const ENEMY_OUTLINE_COLOR := Color8(235, 24, 24)
 const ALLY_OUTLINE_COLOR := Color8(38, 210, 72)
 const OUTLINE_SCALE_MULTIPLIER := 1.18
 const OUTLINE_Z_OFFSET := -1
+const HIGAN_SPAWN_BLOCK_PADDING := 50.0
 const PAUSE_BUTTON_SHAKE_OFFSET := 3.0
 const PAUSE_BUTTON_SHAKE_SPEED := 26.0
 
@@ -544,6 +545,19 @@ func _get_ally_collision_shape(ally: Area2D) -> CollisionShape2D:
 func _get_enemy_sprite(enemy_node: Area2D) -> Sprite2D:
 	return enemy_node.get_node(ENEMY_NODE_PATHS[enemy_node.name]["sprite"])
 
+func _get_higan_spawn_block_rect() -> Rect2:
+	if higan_throw_frame == null:
+		return Rect2()
+	var global_rect := Rect2(higan_throw_frame.global_position, higan_throw_frame.size)
+	return global_rect.grow(HIGAN_SPAWN_BLOCK_PADDING)
+
+func _is_spawn_blocked_by_higan(candidate_position: Vector2, sprite_size: Vector2) -> bool:
+	var blocked_rect := _get_higan_spawn_block_rect()
+	if blocked_rect.size == Vector2.ZERO:
+		return false
+	var candidate_rect := Rect2(candidate_position - (sprite_size * 0.5), sprite_size)
+	return blocked_rect.intersects(candidate_rect)
+
 # Возвращает коллизию выбранного врага по имени узла.
 func _get_enemy_collision_shape(enemy_node: Area2D) -> CollisionShape2D:
 	return enemy_node.get_node(ENEMY_NODE_PATHS[enemy_node.name]["collision"])
@@ -723,13 +737,13 @@ func _spawn_random_enemy() -> void:
 		sprite.scale = base_scale * random_scale
 		_sync_enemy_hitbox(enemy_node)
 
-		var sprite_size = sprite.texture.get_size() * sprite.scale
-		var half_size = sprite_size / 2.0
-		var chosen_position := Vector2.ZERO
-		var found_position := false
+		var sprite_size: Vector2 = sprite.texture.get_size() * sprite.scale
+		var half_size: Vector2 = sprite_size / 2.0
+		var chosen_position: Vector2 = Vector2.ZERO
+		var found_position: bool = false
 
 		for _attempt in range(12):
-			var candidate = Vector2(
+			var candidate: Vector2 = Vector2(
 				randf_range(half_size.x, BASE_VIEWPORT_SIZE.x - half_size.x),
 				randf_range(half_size.y, BASE_VIEWPORT_SIZE.y - half_size.y)
 			)
@@ -740,16 +754,26 @@ func _spawn_random_enemy() -> void:
 					overlaps_existing = true
 					break
 
-			if not overlaps_existing:
+			if not overlaps_existing and not _is_spawn_blocked_by_higan(candidate, sprite_size):
 				chosen_position = candidate
 				found_position = true
 				break
 
 		if not found_position:
-			chosen_position = Vector2(
-				randf_range(half_size.x, BASE_VIEWPORT_SIZE.x - half_size.x),
-				randf_range(half_size.y, BASE_VIEWPORT_SIZE.y - half_size.y)
-			)
+			for _fallback_attempt in range(12):
+				var fallback_candidate: Vector2 = Vector2(
+					randf_range(half_size.x, BASE_VIEWPORT_SIZE.x - half_size.x),
+					randf_range(half_size.y, BASE_VIEWPORT_SIZE.y - half_size.y)
+				)
+				if not _is_spawn_blocked_by_higan(fallback_candidate, sprite_size):
+					chosen_position = fallback_candidate
+					found_position = true
+					break
+			if not found_position:
+				chosen_position = Vector2(
+					randf_range(half_size.x, BASE_VIEWPORT_SIZE.x - half_size.x),
+					randf_range(half_size.y, BASE_VIEWPORT_SIZE.y - half_size.y)
+				)
 
 		enemy_node.global_position = chosen_position
 		occupied_positions.append(chosen_position)
@@ -766,11 +790,28 @@ func spawn_ally() -> Area2D:
 	sprite.scale = base_scale * random_scale
 	_sync_ally_hitbox(ally)
 
-	var sprite_size = sprite.texture.get_size() * sprite.scale
-	var random_x = randf_range(sprite_size.x / 2, BASE_VIEWPORT_SIZE.x - sprite_size.x / 2)
-	var random_y = randf_range(sprite_size.y / 2, BASE_VIEWPORT_SIZE.y - sprite_size.y / 2)
+	var sprite_size: Vector2 = sprite.texture.get_size() * sprite.scale
+	var half_size: Vector2 = sprite_size / 2.0
+	var chosen_position: Vector2 = Vector2.ZERO
+	var found_position: bool = false
 
-	ally.global_position = Vector2(random_x, random_y)
+	for _attempt in range(12):
+		var candidate: Vector2 = Vector2(
+			randf_range(half_size.x, BASE_VIEWPORT_SIZE.x - half_size.x),
+			randf_range(half_size.y, BASE_VIEWPORT_SIZE.y - half_size.y)
+		)
+		if not _is_spawn_blocked_by_higan(candidate, sprite_size):
+			chosen_position = candidate
+			found_position = true
+			break
+
+	if not found_position:
+		chosen_position = Vector2(
+			randf_range(half_size.x, BASE_VIEWPORT_SIZE.x - half_size.x),
+			randf_range(half_size.y, BASE_VIEWPORT_SIZE.y - half_size.y)
+		)
+
+	ally.global_position = chosen_position
 	ally.show()
 	return ally
 
