@@ -18,16 +18,16 @@ body {
 	background-color: black;
 	overflow: hidden;
 	touch-action: none;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 }
 
 #canvas {
 	display: block;
 	width: 800px;
 	height: 600px;
-	flex: 0 0 auto;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 }
 
 #canvas:focus {
@@ -219,6 +219,9 @@ const engine = new Engine(GODOT_CONFIG);
 			},
 		}).then(() => {
 			setStatusMode('hidden');
+			window.dispatchEvent(new Event('resize'));
+			setTimeout(() => window.dispatchEvent(new Event('resize')), 50);
+			setTimeout(() => window.dispatchEvent(new Event('resize')), 200);
 		}, displayFailureNotice);
 	}
 }());
