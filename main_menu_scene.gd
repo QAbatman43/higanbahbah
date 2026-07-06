@@ -57,7 +57,12 @@ func _on_start_button_pressed() -> void:
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()
 
+func _set_clean_window_title() -> void:
+	var project_name := str(ProjectSettings.get_setting("application/config/name"))
+	DisplayServer.window_set_title(project_name, get_window().get_window_id())
+
 func _ready() -> void:
+	RenderingServer.frame_post_draw.connect(_set_clean_window_title, CONNECT_ONE_SHOT)
 	GameSettings.apply_settings(GameSettings.load_settings())
 	randomize()
 	score_button.pressed.connect(_on_score_button_pressed)
