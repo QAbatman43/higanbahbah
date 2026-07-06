@@ -124,6 +124,15 @@ const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
 (function () {
+	const cleanPageTitle = document.title.replace(/\s+\(DEBUG\)$/i, '');
+	const pageTitleElement = document.querySelector('title');
+	const pageTitleObserver = new MutationObserver(() => {
+		if (document.title !== cleanPageTitle) {
+			document.title = cleanPageTitle;
+		}
+	});
+	pageTitleObserver.observe(pageTitleElement, { childList: true, characterData: true, subtree: true });
+
 	const canvas = document.getElementById('canvas');
 	const statusOverlay = document.getElementById('status');
 	const statusProgress = document.getElementById('status-progress');
